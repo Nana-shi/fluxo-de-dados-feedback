@@ -1,8 +1,8 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { useState } from "react";
-import FormularioPostagem from "./components/FormularioPostagem/FormularioPostagem";
+import FormularioPostagem from "./components/FormularioPostagem/FormularioCadastro";
 import { Header } from "./components/Header";
-import TelaDaPostagem from "./components/TelaDaPostagem/TelaDaPostagem";
+import TelaDaPostagem from "./components/TelaPostagem/TelaPostagem";
 import FormularioLogin from "./components/FormularioLogin/FormularioLogin";
 const GlobalStyle = createGlobalStyle`
   * {
@@ -20,19 +20,43 @@ const Container = styled.div`
 
 function App() {
   const [pageFlow, setPageFlow] = useState(1);
+  const [nome, setNome] = useState("");
+  const [fotoPerfil, setFotoPerfil] = useState("");
+  const [objeto, setObjeto] = useState("");
+
+  const [titulo, setTitulo] = useState("");
+  const [imagem, setImagem] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [post, setPost] = useState("");
+
   return (
     <>
       <GlobalStyle />
       <Container>
         <aside>
-          <Header />
+          <Header objeto={objeto} />
           {pageFlow === 1 ? (
-            <FormularioLogin setPageFlow={setPageFlow} />
+            <FormularioLogin
+              setPageFlow={setPageFlow}
+              nome={nome}
+              setNome={setNome}
+              fotoPerfil={fotoPerfil}
+              setFotoPerfil={setFotoPerfil}
+              setObjeto={setObjeto}
+            />
           ) : (
-            <FormularioPostagem />
+            <FormularioPostagem
+              titulo={titulo}
+              imagem={imagem}
+              descricao={descricao}
+              setTitulo={setTitulo}
+              setImagem={setImagem}
+              setDescricao={setDescricao}
+              setPost={setPost}
+            />
           )}
         </aside>
-        <TelaDaPostagem />
+        <TelaDaPostagem post={post} />
       </Container>
     </>
   );
